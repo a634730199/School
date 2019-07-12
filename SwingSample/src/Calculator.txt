@@ -1,0 +1,274 @@
+﻿import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Calculator extends JFrame {
+	private JTextField textField;
+    private ActionListener myListener;
+
+	public Calculator() {
+
+		setTitle("電卓");
+		setSize(300, 300);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+		Container container = getContentPane();
+        container.setLayout(new BorderLayout(5, 5));
+
+
+		JPanel pnlNorth = new JPanel();
+		JPanel pnlCenter = new JPanel();
+
+
+		container.add(pnlNorth, BorderLayout.NORTH);
+        container.add(pnlCenter, BorderLayout.CENTER);
+
+        textField = new JTextField();
+        textField.setEditable(false);
+        textField.setHorizontalAlignment (JTextField.CENTER);
+
+        //---------------
+        pnlNorth.setLayout(new BorderLayout(5, 5));
+        //---------------
+
+        JButton btnClear = useButton("<<<");
+        pnlNorth.add(textField, BorderLayout.CENTER);
+		pnlNorth.add(btnClear, BorderLayout.EAST);
+        String[] titles = {
+				"7", "8", "9", "+",
+				"4", "5", "6", "-",
+				"1", "2", "3", "*",
+				"0", ".", "/", "="
+		};
+
+
+		pnlCenter.setLayout(new GridLayout(4, 4, 3, 3));
+		for (int i = 0; i < titles.length; i++) {
+			JButton btnNum = useButton(titles[i]);
+			pnlCenter.add(btnNum);
+		}
+
+    }
+
+	public JButton useButton (final String titles) {
+
+		JButton button = new JButton(String.valueOf(titles));
+		if(myListener == null){
+			myListener = new ActionListener(){
+				public void actionPerformed(ActionEvent event){
+      				String  btnInformation  = event.getActionCommand();
+    				char key2 = btnInformation.charAt(0);
+    				action(key2);
+    			}
+			};
+		}
+        button.addActionListener(myListener);
+
+        return button;
+    }
+
+	int len;
+	String a, b, value;
+	char exit = '0';
+	char op = 'n';
+	boolean flag = false;
+
+	private void action(char key2){
+
+    	String text;
+    	switch(key2){
+
+	        case '1':
+	        case '2':
+	        case '3':
+	        case '4':
+	        case '5':
+	        case '6':
+	        case '7':
+	        case '8':
+	        case '9':
+	        case '0':
+
+	        	if (flag) {
+	        		textField.setText("");
+	        		textField.setText(String.valueOf(key2));
+	        		flag = false;
+				} else {
+					text = textField.getText() + key2;
+		        	textField.setText(text);
+		        	text = "";
+
+				}
+	            break;
+
+	        case '.':
+	        	if("".equals(textField.getText()))
+	        		break;
+
+	        	if(!"".equals(textField.getText())){
+	        		text = textField.getText();
+					len = text.length();
+					int i = 0;
+					for(; i<len; i++) {
+						if('.' == text.charAt(i)){
+							break;
+						}
+					}
+					if(i<len)
+						break;
+					text = textField.getText() + key2;
+		            textField.setText(text);
+		            text = "";
+	        	}
+	        	break;
+
+        	case '+':
+        		if(!"".equals(textField.getText())){
+        			if ('n' == op) {
+        				a = textField.getText();
+        				op = '+';
+        				flag = true;
+        			} else {
+        				b = textField.getText();
+        				calculation(a, b);
+        				a = value;
+        				textField.setText(value);
+        				op = '+';
+        				flag = true;
+        			}
+        			exit = '1';
+        		}
+        		break;
+
+            case '-':
+            	if(!"".equals(textField.getText())){
+        			if ('n' == op) {
+        				a = textField.getText();
+        				op = '-';
+        				flag = true;
+        			} else {
+        				b = textField.getText();
+        				calculation(a, b);
+        				a = value;
+        				textField.setText(value);
+        				op = '-';
+        				flag = true;
+        			}
+        			exit = '1';
+        		}
+        		break;
+
+            case '*':
+            	if(!"".equals(textField.getText())){
+        			if ('n' == op) {
+        				a = textField.getText();
+        				op = '*';
+        				flag = true;
+        			} else {
+        				b = textField.getText();
+        				calculation(a, b);
+        				a = value;
+        				textField.setText(value);
+        				op = '*';
+        				flag = true;
+        			}
+        			exit = '1';
+        		}
+        		break;
+
+            case '/':
+            	if(!"".equals(textField.getText())){
+        			if ('n' == op) {
+        				a = textField.getText();
+        				op = '/';
+        				flag = true;
+        			} else {
+        				b = textField.getText();
+        				calculation(a, b);
+        				a = value;
+        				textField.setText(value);
+        				op = '/';
+        				flag = true;
+        			}
+        			exit = '1';
+        		}
+        		break;
+
+            case '<':
+            	text = textField.getText();
+            	if(!"".equals(text)){
+            		len = text.length();
+                	text = text.substring(0, len-1);
+                	textField.setText(text);
+            	}
+            	text="";
+            	break;
+
+            case '=':
+
+            	if('0' == exit){
+            		textField.setText("");
+            		break;
+            	}
+            	if("".equals(textField.getText()))
+            		break;
+            	b = textField.getText();
+
+            	calculation(a, b);
+                textField.setText(String.valueOf(value));
+                break;
+            default: ;
+        }
+    }
+
+    private void calculation(String a, String b){
+    	double v1 = Double.parseDouble(a);
+    	double v2 = Double.parseDouble(b);
+    	double v=0;
+    	switch(op){
+            case '+':
+                v = v1 + v2;
+                exit = '0';
+                a = b = null;
+                op = 'n';
+                break;
+
+            case '-':
+                v = v1 - v2;
+                exit = '0';
+                a = b = null;
+                op = 'n';
+                break;
+
+            case '*':
+                v = v1 * v2;
+                exit = '0';
+                a = b = null;
+                op = 'n';
+                break;
+
+            case '/':
+            	if(v2==0) break;
+                v = v1 / v2;
+                exit = '0';
+                a = b = null;
+                op = 'n';
+                break;
+            default: ;
+        }
+    	value = String.valueOf(v);
+    }
+    public static void main(String[] args) {
+		new Calculator().setVisible(true);
+    }
+}
