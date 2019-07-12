@@ -12,12 +12,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class EditorExercise extends JFrame{
 
 	 JButton open,save,clear;
-	 JTextField jt;
+	 JTextArea jt;
 	 JMenuBar mb;
 	 JMenu file,tools;
 	 JMenuItem jopen,jsave,jexit,jclear;
@@ -45,7 +45,7 @@ public class EditorExercise extends JFrame{
 		jp.add(clear);
 
 
-		jt = new JTextField();
+		jt = new JTextArea();
 
 		mb = new JMenuBar();
 
@@ -73,49 +73,53 @@ public class EditorExercise extends JFrame{
 		c.add(mb,BorderLayout.NORTH);
 
 	}
-}
-class FileOpenAction extends AbstractAction{
-	FileOpenAction(String title){
-		putValue(Action.NAME,title);
+	class FileOpenAction extends AbstractAction{
+		FileOpenAction(String title){
+			putValue(Action.NAME,title);
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JFileChooser fc = new JFileChooser();
+			int selected = fc.showOpenDialog(EditorExercise.this);
+			if(selected == JFileChooser.APPROVE_OPTION) {
+				FileWrapper fw = new FileWrapper();
+				String pathName = fc.getSelectedFile().getPath();
+				String data = fw.ReadFile(pathName);
+			}
+
+		}
+
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JFileChooser fc = new JFileChooser();
-		int selected = fc.showOpenDialog();
-		if(e.getActionCommand() == "開く") {
-			FileWrapper fw = new FileWrapper(fc.getSelectedFile().getName(),fc.getSelectedFile().getPath());
+
+	class FileSaveAction extends AbstractAction{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+	}
+
+	class FileQuitAction extends AbstractAction{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+	}
+
+	class ClearAction extends AbstractAction{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO 自動生成されたメソッド・スタブ
+
 		}
 
 	}
 
 }
 
-class FileSaveAction extends AbstractAction{
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-}
-
-class FileQuitAction extends AbstractAction{
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-}
-
-class ClearAction extends AbstractAction{
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
-}

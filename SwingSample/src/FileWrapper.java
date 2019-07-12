@@ -9,6 +9,21 @@ public class FileWrapper{
 		pathName = "無題.txt";
 	}
 
+	void ReadFile(String pathName) {
+		RandomAccessFile r = new RandomAccessFile(pathName,"r");
+		r.seek(0);
+		for(int i = 1;i < r.length() - 1;i++) {
+			if(!(r.readLine().equals(null))){
+				System.out.print(r.readLine()+"\n");
+			}
+			System.out.print(r.getFilePointer());
+		}
+		r.seek(0);
+		r.close();
+	}
+
+
+
 	public FileWrapper(String pathName) {
 		this.pathName = pathName;
 	}

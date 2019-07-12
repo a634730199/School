@@ -5,13 +5,21 @@ public class test {
 
 	public static void main(String[] args) throws IOException{
 		RandomAccessFile r = new RandomAccessFile("Z:\\java2\\git\\SwingSample\\src\\Calculator.txt","r");
-		r.seek(0);
-		for(int i = 1;i < r.length() - 1;i++) {
-			if(!(r.readLine().equals(null))){
-				System.out.print(r.readLine()+"\n");
+		long pos = r.length() - 1;
+		String[] str = new String[(int)pos];
+		while(pos > 0) {
+			pos--;
+			r.seek(pos);
+			if(r.readByte()=='\n') {
+				str[(int)pos] = r.readLine()+"\n";
 			}
-			System.out.print(r.getFilePointer());
 		}
+
+
+		for(long i = r.length() - 2;i > 0;i--) {
+			System.out.print(str[(int) i]);
+		}
+
 		r.seek(0);
 		r.close();
 	}
