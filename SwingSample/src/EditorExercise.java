@@ -20,7 +20,7 @@ public class EditorExercise extends JFrame{
 	 JTextArea jt;
 	 JMenuBar mb;
 	 JMenu file,tools;
-	 JMenuItem jopen,jsave,jexit,jclear;
+	 JMenuItem jopen,jsave,jexit,jclear,jnew;
 	 JPanel jp;
 
 	public static void main(String[] args) {
@@ -34,7 +34,7 @@ public class EditorExercise extends JFrame{
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
 
-		open = new JButton("開く");
+		open = new JButton(new FileOpenAction("開く"));
 		save = new JButton("保存");
 		clear = new JButton("クリア");
 
@@ -52,10 +52,11 @@ public class EditorExercise extends JFrame{
 		file = new JMenu("ファイル");
 		tools = new JMenu("ツール");
 
-		jopen = new JMenuItem("開く");
-		jsave = new JMenuItem("保存");
-		jexit = new JMenuItem("終了	");
-		jclear = new JMenuItem("保存");
+		jnew = new JMenuItem(new FileNewAction("新規"));
+		jopen = new JMenuItem(new FileOpenAction("開く"));
+		jsave = new JMenuItem(new FileSaveAction("保存"));
+		jexit = new JMenuItem(new FileQuitAction("終了"));
+		jclear = new JMenuItem(new ClearAction("クリア"));
 
 		file.add(jopen);
 		file.add(jsave);
@@ -73,6 +74,16 @@ public class EditorExercise extends JFrame{
 		c.add(mb,BorderLayout.NORTH);
 
 	}
+	class FileNewAction extends AbstractAction{
+		FileNewAction(String title){
+			putValue(Action.NAME, title);
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			setTitle( "無題.txt" );
+			jt.setText("");
+		}
+	}
 	class FileOpenAction extends AbstractAction{
 		FileOpenAction(String title){
 			putValue(Action.NAME,title);
@@ -82,9 +93,9 @@ public class EditorExercise extends JFrame{
 			JFileChooser fc = new JFileChooser();
 			int selected = fc.showOpenDialog(EditorExercise.this);
 			if(selected == JFileChooser.APPROVE_OPTION) {
-				FileWrapper fw = new FileWrapper();
 				String pathName = fc.getSelectedFile().getPath();
-				String data = fw.ReadFile(pathName);
+				FileWrapper fw = new FileWrapper(pathName);
+				jt.setText(fw.ReadFile());
 			}
 
 		}
@@ -92,7 +103,9 @@ public class EditorExercise extends JFrame{
 	}
 
 	class FileSaveAction extends AbstractAction{
-
+		FileSaveAction(String title){
+			putValue(Action.NAME,title);
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO 自動生成されたメソッド・スタブ
@@ -102,7 +115,9 @@ public class EditorExercise extends JFrame{
 	}
 
 	class FileQuitAction extends AbstractAction{
-
+		FileQuitAction(String title){
+			putValue(Action.NAME, title);
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO 自動生成されたメソッド・スタブ
@@ -112,7 +127,9 @@ public class EditorExercise extends JFrame{
 	}
 
 	class ClearAction extends AbstractAction{
-
+		ClearAction(String title){
+			putValue(Action.NAME, title);
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO 自動生成されたメソッド・スタブ
