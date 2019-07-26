@@ -1,21 +1,36 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class test {
-	final String pathName = "Z:/java2/git/SwingSample/src/Calculator.txt";
+	final static String pathName = "C:/Users/18yn0108/Desktop/Calculator.txt";
 	public static void main(String[] args){
-
-	}
-	String ReadFile(String pathName) {
-		String str = null;
-		try(BufferedReader r = new BufferedReader(new FileReader(pathName))){
+		File f = new File(pathName);
+		FileReader fr = null;
+		BufferedReader r = null;
+		try{
+			String str = null;
+			fr = new FileReader(f);
+			r = new BufferedReader(fr);
 			while ((str = r.readLine()) != null) {
-                str += r.readLine();
+                System.out.print(str + "\n");
             }
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if(fr != null)
+					fr.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(r != null)
+					r.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		return str;
-
 	}
 }

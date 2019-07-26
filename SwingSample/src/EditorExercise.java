@@ -11,7 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class EditorExercise extends JFrame{
@@ -22,6 +24,7 @@ public class EditorExercise extends JFrame{
 	 JMenu file,tools;
 	 JMenuItem jopen,jsave,jexit,jclear,jnew;
 	 JPanel jp;
+	 JScrollPane jsp;
 
 	public static void main(String[] args) {
 		new EditorExercise();
@@ -29,14 +32,14 @@ public class EditorExercise extends JFrame{
 
 	EditorExercise(){
 		setBounds(400,400,400,400);
-		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
 
+
 		open = new JButton(new FileOpenAction("開く"));
-		save = new JButton("保存");
-		clear = new JButton("クリア");
+		save = new JButton(new FileSaveAction("保存"));
+		clear = new JButton(new ClearAction("クリア"));
 
 
 		jp = new JPanel(new GridLayout(1,1));
@@ -46,13 +49,14 @@ public class EditorExercise extends JFrame{
 
 
 		jt = new JTextArea();
+		jsp = new JScrollPane(jt);
+		jsp.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		mb = new JMenuBar();
 
 		file = new JMenu("ファイル");
 		tools = new JMenu("ツール");
 
-		jnew = new JMenuItem(new FileNewAction("新規"));
 		jopen = new JMenuItem(new FileOpenAction("開く"));
 		jsave = new JMenuItem(new FileSaveAction("保存"));
 		jexit = new JMenuItem(new FileQuitAction("終了"));
@@ -66,23 +70,12 @@ public class EditorExercise extends JFrame{
 		mb.add(file);
 		mb.add(tools);
 
-
-		jt.setSize(200,150);
-
-		c.add(jt,BorderLayout.CENTER);
+		c.add(jsp,BorderLayout.CENTER);
 		c.add(jp,BorderLayout.SOUTH);
 		c.add(mb,BorderLayout.NORTH);
 
-	}
-	class FileNewAction extends AbstractAction{
-		FileNewAction(String title){
-			putValue(Action.NAME, title);
-		}
+		setVisible(true);
 
-		public void actionPerformed(ActionEvent e) {
-			setTitle( "無題.txt" );
-			jt.setText("");
-		}
 	}
 	class FileOpenAction extends AbstractAction{
 		FileOpenAction(String title){
@@ -104,11 +97,17 @@ public class EditorExercise extends JFrame{
 
 	class FileSaveAction extends AbstractAction{
 		FileSaveAction(String title){
-			putValue(Action.NAME,title);
+			putValue(Action.NAME, title);
 		}
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO 自動生成されたメソッド・スタブ
+			JFileChooser filechooser = new JFileChooser();
+			int result = filechooser.showSaveDialog(EditorExercise.this);
+
+			if(result == JFileChooser.APPROVE_OPTION) {
+				String pathName = filechooser.getSelectedFile().getPath();
+				FileWrapper fw = new FileWrapper(pathName);
+				fw.WriteFile(jt.getText());
+			}
 
 		}
 
@@ -118,9 +117,12 @@ public class EditorExercise extends JFrame{
 		FileQuitAction(String title){
 			putValue(Action.NAME, title);
 		}
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO 自動生成されたメソッド・スタブ
+			int option = JOptionPane.showConfirmDialog(EditorExercise.this, "終了？", "Exit", JOptionPane.OK_CANCEL_OPTION);
+
+			if(option == JOptionPane.OK_OPTION) {
+				System.exit(0);
+			}
 
 		}
 
@@ -130,10 +132,11 @@ public class EditorExercise extends JFrame{
 		ClearAction(String title){
 			putValue(Action.NAME, title);
 		}
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO 自動生成されたメソッド・スタブ
-
+				int option = JOptionPane.showConfirmDialog(EditorExercise.this, "クリア？", "Clear", JOptionPane.YES_NO_OPTION);
+				if(option == JOptionPane.YES_OPTION) {
+					jt.setText("");
+				}
 		}
 
 	}
