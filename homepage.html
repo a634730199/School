@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .col-sm-4,
+        .container {
+            margin-top: 10px;
+        }
+
+        .img-responsive {
+            display: block;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .col-sm-6,
+        .table-responsive {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .text-center {
+            /* background: url("https://ord.yahoo.co.jp/o/image/RV=1/RE=1574174566/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cHM6Ly9maXZlcnItcmVzLmNsb3VkaW5hcnkuY29tL3RfbW9iaWxlX3dlYl8yLHFfYXV0byxmX2F1dG8vZ2lncy8zMTcxNDQ4L29yaWdpbmFsL2E0MWEzOGYzNzMzYmI5NzI3OWE0OWQxNDQ5ZjczMzdkZWNlNTA2OTMuanBn/RS=%5EADB7Li4k6ZMNRb83wWMeth5O0GMRo0-;_ylt=A2RCL6rmrdJdoTIASi.U3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMQRpZHgDMARvaWQDQU5kOUdjUlpJTktCMmlkanhxZ3NLdnhubThXZU5oWk9mRjdkR3NDakJuV2RTYS1wYTBjd0ZjaFFkcWQ0elEEcANiRzluYnctLQRwb3MDMzUyBHNlYwNzaHcEc2xrA3Nmc3QEdHVybAM-"); */
+            background-color: black;
+           
+        }
+
+        .carousel-control-prev,.carousel-control-next{
+            color: rgb(255, 0, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">
+            <h1>
+                テクノシネマズ
+            </h1>
+        </a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <!-- <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+            </ul> -->
+
+
+        </div>
+
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="#">ログイン</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">新規会員登録</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="container">
+                <img src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574172190/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cHM6Ly9pbWcuY2luZW1hdG9kYXkuanAvYS9OMDExMjM5Ny9fc2l6ZV82NDB4L192XzE1NzQwNDk4OTYvbWFpbi5qcGc-/RS=%5EADBg5KLlBlRJeHpLnYOEHbJE1qQgF8-;_ylt=A2RCL5iepNJdHykArhKU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMQRpZHgDMARvaWQDQU5kOUdjUWFHdGRaN0hzbnBEczZDU09ZajZZTTdfSzZrdTlxVFRTUkMzX1RsTGhpMEpMT2hVMmNPX0g1aER6aARwAzQ0R1o0NEdfNDRHajQ0S3o0NEdRNDRLSjQ0R1g0NENBNXBpZzU1UzcEcG9zAzEEc2VjA3NodwRzbGsDc2ZzdAR0dXJsA2h0dHBzOi8vbXNwLmMueWltZy5qcC95amltYWdlP3E9cXNBempLOFh5TEVjUE1jS0lhQjVsVVlLYXllVzh4czAxNnBZRlJpY1dKSHBkQ05XeTFncGNRSXhjRm9CalE4dzZ0cG1OQl85ZGpZdXlrSFFxNmljdkFkczh5aUo5WVJTbDFHT2ZZS2x1N3YuaF91WDdMelNvemhmUy5raC5UVzdiczBzR0tRV1daUFJiX3dDVjNsNDNsUS0mc2lnPTEzY2N0c2h0MQ--"
+                    class="rounded img-responsive" alt="Cinque Terre">
+                <div class="container">
+                    <h2>すみっコぐらし</h2>
+                    <p>概要：
+                        昔々。。。
+                    </p>
+
+                    <button type="button" class="btn btn-primary">予約する</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574172011/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cHM6Ly93d3cuY2lucmEubmV0L3VwbG9hZHMvaW1nL25ld3MvMjAxOS8yMDE5MDkyMC10ZW5raW5va29fZnVsbC5qcGc-/RS=%5EADBROll.aeRYIw1gnAF2rPXoGO6Wzs-;_ylt=A2RCA9nqo9Jd420AaQGU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMARpZHgDMARvaWQDQU5kOUdjUzFLUll4OTBmSHY3T0lqYlVxSXZNREJ0cmk5YmNPcFFsU3NJYVdZZ3FGMjBfVTBaR2U3anhiM2lnBHADNWFTcDVyQ1g0NEd1NWEyUQRwb3MDOQRzZWMDc2h3BHNsawNzZnN0BHR1cmwDaHR0cHM6Ly9tc3AuYy55aW1nLmpwL3lqaW1hZ2U_cT15REpCYW0wWHlMSE9KRG5ON0tpblA2UGoxSHIuZDVuN0NIM1I0RWVpVTZnNDJhejRtcTUyWkc4dUdSbGk5MUc4VkJ2SndWcWdNdnhGSHc3S3c4NEVEM19JR3pyU3ZBeWl3RGRWSHhNUU5iMV9laDBySGdHeERFdGhIZ3NpaGRldnB1MTl4OWh4SW85cTdfRjJMT2cuJnNpZz0xM2FiaGRxaHA-"
+                                class="rounded img-responsive" alt="Cinque Terre">
+                            <div class="card-body">
+                                <strong>天気の子</strong>
+                                <p>概要：</p>
+                                <button type="button" class="btn btn-primary">予約する</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574171956/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cHM6Ly9pbWcuY2luZW1hdG9kYXkuanAvYS9OMDExMTMxNC9fc2l6ZV82NDB4L192XzE1Njg5Nzk3OTYvbWFpbi5qcGc-/RS=%5EADByfQYQNPBqrBbvQthoaRhEQGG9Dg-;_ylt=A2RCL5mzo9Jd8zoALxGU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMARpZHgDMARvaWQDQU5kOUdjVEVIM1ZyRjd0em5hMzVuRUYxOE00eDFEOE9oLVFOanFUcGN5Qy1hOHRsdlVyUVhabkRfUWFzS2w1NgRwAzVwaWc1NVM3BHBvcwMyNARzZWMDc2h3BHNsawNzZnN0BHR1cmwD"
+                                class="rounded img-responsive" alt="Cinque Terre">
+                            <div class="card-body">
+                                <strong>JOKER</strong>
+                                <p>概要：</p>
+                                <button type="button" class="btn btn-primary">予約する</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574172841/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cHM6Ly9pd2l6LW1vdmllcy5jLnlpbWcuanAvaW1fc2lnZ09QN2ZmLi5TWWpBLl8uQU1aM1ZkaEEtLS14NjgwL2MvbW92aWVzL3BpY3QvcC9wL2E3L2RiLzE3Nzg2MF8wMS5qcGc-/RS=%5EADBX.YWvNjCu4qHuFNq0h5LuUAl4Kc-;_ylt=A2RivbQop9JdGAYA7CGU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMQRpZHgDMARvaWQDQU5kOUdjUk1xWFdSbU5pVjdHc2I4Qm1SVllxVHlwMHZWU0FfaVlLY2xWVFRFOGEtNHpNNlhoTHNGbWJFVHR3eQRwAzQ0T1c0NE9wNDRLazQ0T0k0NE9RNDRPODQ0T3pJT2FZb09lVXV3LS0EcG9zAzIEc2VjA3NodwRzbGsDc2ZzdAR0dXJsA2h0dHBzOi8vbXNwLmMueWltZy5qcC95amltYWdlP3E9YlJIM2F6NFh5TEhxaDRxWEdaOGUuQjZIZWNha0tkVnEyb0JSNjU1UmV6WlI5RC55UTdJWU5Qdzh1MWhDVlBPbjVWSWg2MjdvdGt5NG40REI4Q3k0VkNBc2piSE9USlFIWFgwSVpDeG9CVkFwcDBtZG9HZVhxVGYyZThxam81TE1qRzhta3FBdWwwZDNzb21LS3czdE05cy0mc2lnPTEzY2k1c2I2Nw--"
+                                class="rounded img-responsive" alt="Cinque Terre">
+                            <div class="card-body">
+                                <strong>ブライトバーン／恐怖の拡散者</strong>
+                                <p>概要：</p></br>
+                                <button type="button" class="btn btn-primary">予約する</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <img src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574172298/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cDovL2FtYXNzaW5nMi5zYWt1cmEubmUuanAvaW1hZ2UvamFja2V0L2xhcmdlLzIwMTkvMTAwMjczLmpwZw--/RS=%5EADBP9rx7WEAUuJVUjpk36NGDmUnVtM-;_ylt=A2RCCzQKpdJdWQ4A6QWU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMARpZHgDMARvaWQDQU5kOUdjUVA0V0xnamJ2ang0OW1ZTDcwMVJMWDhQT0FsS0lrdl9OWTF3SXJIdEtkLVJ6ZGE2WmJrSENadnBRBHADNDRLXzQ0Tzg0NE9mNDRPTjQ0Tzg0NEtfNDRPODc3eWE0NE9MNDRPbDQ0Tzg0NE83NDRPVjQ0S240NEtrNDRPSTQ0Q0E1cGlnNTVTNwRwb3MDMTAEc2VjA3NodwRzbGsDc2ZzdAR0dXJsA2h0dHBzOi8vbXNwLmMueWltZy5qcC95amltYWdlP3E9SzAzTzlPRVh5TEVNWkZuS1NNSzQ5OEJFcGhfSXhlaTdiRkcyTnRQQnBiNUJYWERLNld0dnE3Vlg4X1djUlNvSjJ1UmhuSV9BNXNzVXJTU29OWDNUTEtBdmFCUjVMR24zYzloRmp1TDNQZUlGSWtBSjlYbFZGWml5NUYuTEFjc3ZoTVJoa0ZFOWZvN1c5YkYyOVFWSCZzaWc9MTNhZXBkYzZn"
+                                class="rounded img-responsive" alt="Cinque Terre">
+                            <div class="card-body">
+                                <strong>ターミネーター：ニュー・フェイト</strong>
+                                <p>概要：</p>
+                                <button type="button" class="btn btn-primary">予約する</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            
+            <div class="container">
+                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                    <!-- 指示符 -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        <li data-target="#demo" data-slide-to="2"></li>
+                    </ul>
+
+                    <!-- 轮播图片 -->
+                    <p><div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="img-responsive" style="height: 300px;width: auto;"
+                                src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574172922/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cHM6Ly9tYXRpbmVlLW1vdmllLmpwL2ltYWdlcy9vZzMucG5n/RS=%5EADBeDDbk5GH5KT9FVfEsEDrn15DkJw-;_ylt=A2Riol15p9Jd0VMAsBCU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMARpZHgDMARvaWQDQU5kOUdjUjkwa3N3dnd4dW9xSWRoOEpXZExTMXpIQTdxTTRoTzF5MUdwUEl0OGx4TkZyN2huWUlLWDVyZGdtTwRwAzQ0T2U0NE9CNDRPTjQ0R3U1N1dDNDRLUDQ0S0s0NEdySU9hWW9PZVV1dy0tBHBvcwMzBHNlYwNzaHcEc2xrA3Nmc3QEdHVybANodHRwczovL21zcC5jLnlpbWcuanAveWppbWFnZT9xPURnNHpQbzRYeUxGVGFvVWYzcThkdldoTGdHOEtlQm1pNnQ4ZDVTZS5CNkpOa0NWdmFjVXlJbFZuM3hxLmY4R0gweUc2M25veVdIMTlaM1BqMUlhUE1hYU9PX0VxYUVwY3NMazluWHQ1blR4MnQ4aldpM1dOX19mLnFDMUw3dlpCX1pDRHlERjVfV0dWWDcyaVI0SkhQamMtJnNpZz0xM2NvOHFvMHM-">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="img-responsive" style="height: 300px;width: auto;"
+                                src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574173916/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cHM6Ly9kMXV6azlvOWNnMTM2Zi5jbG91ZGZyb250Lm5ldC9mLzE2NzgyOTQzL3JjLzIwMTkvMDcvMTkvZjU1YWYzNzNmZGY2ODFhMDk1MDAxYjI3N2IyOGZhODYzODVhOTA1NF9sYXJnZS5qcGc-/RS=%5EADBgJSnQQrVcrGGsVCRmy5HEIQJPAk-;_ylt=A2RCL5lbq9JdtEwAfS.U3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMQRpZHgDMARvaWQDQU5kOUdjUVRnRGk2bjgyWVhRZV9wUTNYMnNyY0Y4RVJpSUxSLVRBZnJtN0EwMUcwLXJNZkhTNjBtcGQ0MG9fVgRwA2FYUWdkR2hsSUdWdVpBLS0EcG9zAzUEc2VjA3NodwRzbGsDc2ZzdAR0dXJsA2h0dHBzOi8vbXNwLmMueWltZy5qcC95amltYWdlP3E9elIwUEhDMFh5TEVPZTQwZ3p4Z3NMOEJnVzZFaF80eGxDZUV1ZkhxQ0VFWmlfWjNFaEN4d3hqRDNaRjZzU0JJWXdOR3RjblVKVWVRamJWaWVodEpTOWN0ZnpEbDFTOGFvWW1BYm1EUWFMakppUHlLMWczdWtFQ0paTUR3bEFLeHVZaGZYLm9vZy52N3BuODh4TGMzbENtYy0mc2lnPTEzYzE1bzZlYw--">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="img-responsive" style="height: 300px;width: auto;"
+                                src="https://ord.yahoo.co.jp/o/image/RV=1/RE=1574172994/RH=b3JkLnlhaG9vLmNvLmpw/RB=/RU=aHR0cDovL2VuZC1vZi1zdGF0ZXMuY29tL2ltYWdlcy9wcmVfYmcuanBn/RS=%5EADBwqY4T_O.iGIkGrWiUpWjzcEfsuI-;_ylt=A2RimU7Bp9JdhXQAPAGU3uV7;_ylu=X3oDMTAyN3Vldmc1BDAD;_ylc=X3IDMgRmc3QDMQRpZHgDMARvaWQDQU5kOUdjU1JyMFBBLTFyV280c0xBQmVLRy1uN3psUmZHeURqX1hZRVlZLTlrR2F4M09vNE9ndVdDQnZHenQyMwRwAzQ0S280NE96NDRPSjQ0Tzc0NEtxNDRPVzQ0Tzc0NEs1NDRPRzQ0S2s0NE9FSU9hWW9PZVV1dy0tBHBvcwMyBHNlYwNzaHcEc2xrA3Nmc3QEdHVybANodHRwczovL21zcC5jLnlpbWcuanAveWppbWFnZT9xPTNIdWdwWkVYeUxHQ0M1ZDVGMVA0UUdjY2RtdDc4TnJlaVJoVjNqSXVqb1FidjcyeXlFUW1DY09zSDQ1NTZHbFhqQ1hJS2V5WDV2dkZVd0ZVek5PQkJtUXFoSHBCTnJJZFZaZV9rSHBpblFzYjZXb2ZzZzJoamdFSG54ZjZaTmx5SGdkb0FTQmpzdWJWZFFPNUpyVC5LNnctJnNpZz0xM2NtbGxzZmc-">
+                        </div>
+                    </div>
+
+                    <!-- 左右切换按钮 -->
+                    
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                    
+                </div></p></br></br></br></br></br>
+
+
+                <div class="table-responsive">
+                    <table class="table text-nowrap table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>映画名前</th>
+                                <th>劇場</th>
+                                <th>上映時間</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>映画１</td>
+                                <td>XXX劇場</td>
+                                <td id="tm">
+                                    <script>setInterval("tm.innerHTML=new Date().toLocaleString()",1000);</script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>映画２</td>
+                                <td>XXX劇場</td>
+                                <td id="tm1">
+                                    <script>setInterval("tm1.innerHTML=new Date().toLocaleString()",1000);</script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>映画３</td>
+                                <td>XXX劇場</td>
+                                <td id="tm2">
+                                     <script>setInterval("tm2.innerHTML=new Date().toLocaleString()",1000);</script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>映画４</td>
+                                <td>XXX劇場</td>
+                                <td id="tm3">
+                                  <script>setInterval("tm3.innerHTML=new Date().toLocaleString()",1000);</script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>映画５</td>
+                                <td>XXX劇場</td>
+                                <td id="tm4">
+                                     <script>setInterval("tm4.innerHTML=new Date().toLocaleString()",1000);</script>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div></br></br></br></br></br>
+                <div class="row">
+                    <div class="col-sm-6">
+                    <button type="button" class="btn btn-link">劇場一覧へ</button>
+                    </div>
+                    <div class="col-sm-6">
+                    <button type="button" class="btn btn-link">映画一覧へ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center" style="margin-bottom:0; margin-top: 50px; border-radius:0;">
+        <p style="color: aliceblue;">LOGO</p>
+    </div>
+</body>
+
+</html>
